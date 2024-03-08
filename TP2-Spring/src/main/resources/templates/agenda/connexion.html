@@ -2,15 +2,11 @@
 
 	<body>
 		
-		<h2>Connecté : </h2>
+		<a href="/agenda/deconnexion"> Deconnexion </a>
 		
-		<table>
-		<tr><th>Nom</th><th>Prénom</th></tr>
-				<tr th:each="personne : ${listePersonne}">
-				<td th:text="${personne.nom}" />
-				<td th:text="${personne.prenom}" />
-				</tr>
-		</table>
+		<h1 th:text="'Personne connecté : ' + ${session.nom} + ' ' + ${session.prenom} "/>
+		
+		
 		
 	</body>
 </html>

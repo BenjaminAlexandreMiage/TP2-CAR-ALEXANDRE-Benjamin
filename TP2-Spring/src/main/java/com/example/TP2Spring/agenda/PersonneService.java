@@ -6,6 +6,6 @@ public interface PersonneService {
 	
 	Iterable<Personne> getAllPersonne();
 	
-	boolean findPersonne(String mail, String mdp);
+	Personne findPersonne(String mail, String mdp);
 
 }

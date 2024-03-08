@@ -19,14 +19,14 @@ public class PersonneServiceImpl implements PersonneService {
 	}
 	
 	@Override
-	public boolean findPersonne(String mail, String mdp) {
+	public Personne findPersonne(String mail, String mdp) {
 		Iterable<Personne> verifMail = repo.findByMail(mail);
-		boolean mdpTrouve = false;
+		Personne personneTrouve = null;
 		for(Personne p : verifMail) {
 			if(p.getMdp().equals(mdp)){
-				mdpTrouve = true;
+				personneTrouve = p;
 			}
 		}
-		return mdpTrouve;
+		return personneTrouve;
 	}
 }
