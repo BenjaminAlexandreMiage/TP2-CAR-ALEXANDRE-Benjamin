@@ -1,0 +1,16 @@
+<html xmlns:th="https://www.thymeleaf.org" >
+
+	<body>
+		
+		<h2>Connecté : </h2>
+		
+		<table>
+		<tr><th>Nom</th><th>Prénom</th></tr>
+				<tr th:each="personne : ${listePersonne}">
+				<td th:text="${personne.nom}" />
+				<td th:text="${personne.prenom}" />
+				</tr>
+		</table>
+		
+	</body>
+</html>

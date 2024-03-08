@@ -1,0 +1,25 @@
+<html xmlns:th="https://www.thymeleaf.org" >
+
+	<body>
+		
+		<h2>Connexion : </h2>
+			
+		<form action="/agenda/connexion" method="post">
+			<p>Mail : <input type="text" name="mail"></p>
+			<p>Mot de passe : <input type="text" name="mdp"></p>
+			<input type="submit" value="Connexion">
+		</form>	
+			
+		<h2>Inscription : </h2>
+		
+		<form action="/agenda/add" method="post">
+			<p>Mail : <input type="text" name="mail"></p>
+			<p>Mot de passe : <input type="text" name="mdp"></p>
+			<p>Nom : <input type="text" name="nom"></p>
+			<p>Prenom : <input type="text" name="prenom"></p>
+			<input type="submit" value="Inscription">
+		</form>	
+		
+		
+	</body>
+</html>
