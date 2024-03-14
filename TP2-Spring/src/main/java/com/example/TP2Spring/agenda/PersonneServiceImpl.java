@@ -7,6 +7,7 @@ public class PersonneServiceImpl implements PersonneService {
 	
 	@Autowired
 	private PersonneRepository repo;
+	
 
 	@Override
 	public void ajouterPersonne(String mail,String mdp,String nom,String prenom){
@@ -29,4 +30,5 @@ public class PersonneServiceImpl implements PersonneService {
 		}
 		return personneTrouve;
 	}
+	
 }

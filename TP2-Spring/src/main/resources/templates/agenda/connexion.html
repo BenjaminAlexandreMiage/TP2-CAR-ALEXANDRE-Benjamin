@@ -6,7 +6,17 @@
 		
 		<h1 th:text="'Personne connecté : ' + ${session.nom} + ' ' + ${session.prenom} "/>
 		
+		<h1>Vos agendas : </h1>
 		
+		
+		
+		<h1>Créer une agenda : </h1>
+		
+		<form action="/agenda/addAgenda" method="post">
+			<p>Titre : <input type="text" name="titre"></p>
+			<input type="Long"  name="idProprietaire" value="${session.id}">
+			<input type="submit" value="Inscription">
+		</form>	
 		
 	</body>
 </html>

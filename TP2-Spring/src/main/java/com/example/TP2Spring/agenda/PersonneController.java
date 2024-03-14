@@ -19,6 +19,9 @@ public class PersonneController {
 	@Autowired
 	private PersonneService service;
 	
+	@Autowired
+	private AgendaService serviceAgenda;
+	
 	@GetMapping("/home")
 	public String home() {
 		return "/agenda/home";
@@ -40,17 +43,27 @@ public class PersonneController {
 		session.setAttribute("nom", verifPersonne.getNom());
 		session.setAttribute("prenom", verifPersonne.getPrenom());
 		session.setAttribute("mail", verifPersonne.getMail());
+		session.setAttribute("id", verifPersonne.getId());
 		
 		return "agenda/connexion";
 	}
 	
 	@GetMapping("/deconnexion")
 	public String Deconnexion(HttpSession session) {
+		
 		session.setAttribute("nom",null);
 		session.setAttribute("prenom",null);
 		session.setAttribute("mail",null);
+		session.setAttribute("id", null);
+		
 		return "redirect:/agenda/home";
 	}
 	
+	
+	@PostMapping("/addAgenda")
+	public String add (@RequestParam String titre, @RequestParam Long idProprietaire) {
+		serviceAgenda.ajouterAgenda(titre,idProprietaire);
+		return "redirect:/agenda/connexion";
+	}
 	
 }
