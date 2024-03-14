@@ -7,14 +7,22 @@
 		<h1 th:text="'Personne connecté : ' + ${session.nom} + ' ' + ${session.prenom} "/>
 		
 		<h1>Vos agendas : </h1>
-		
-		
+
+			<table border="1">
+				<tr><th>id</th></tr>
+				<tr th:each="agenda : ${agendas}">
+					<td th:text="${agenda.id}" />
+				</tr>
+			</table>
+			
+			
 		
 		<h1>Créer une agenda : </h1>
 		
 		<form action="/agenda/addAgenda" method="post">
 			<p>Titre : <input type="text" name="titre"></p>
-			<input type="Long"  name="idProprietaire" value="${session.id}">
+			<input type="hidden"  name="mail" th:value="${session.mail}">
+			<input type="hidden"  name="mdp" th:value="${session.mdp}">
 			<input type="submit" value="Inscription">
 		</form>	
 		
