@@ -6,7 +6,7 @@
 	
 	<h1 th:text="'Vous êtes sur l \' agenda  : ' + ${session.agendaTitre}"/>
 	
-	<h2>Vos évenements : </h2>
+	<h2>Vos évenements :</h2>
 	
 	<ul th:each="event : ${evenements}">
 			<il th:text="${event.titre} + ' à la date du : ' + ${event.date} "/>
@@ -16,6 +16,10 @@
 				<input type="submit" value ="Supprimer">
 			</form>
 	</ul>	
+	
+	<form action="/agenda/afficheImpression" method="post">
+		<input type="submit" value="Impression">
+	</form>
 	
 	
 	<h2>Ajouter une évenement : </h2>

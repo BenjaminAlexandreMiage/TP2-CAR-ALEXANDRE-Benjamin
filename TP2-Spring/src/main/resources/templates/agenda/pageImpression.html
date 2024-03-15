@@ -1,0 +1,19 @@
+<html xmlns:th="https://www.thymeleaf.org">
+
+<body>
+
+	<a href="/agenda/directionAgenda"> Retour </a>
+
+	<h1>Affichage de l'impression : </h1>
+	
+		<table border="1">
+			<tr><th>Titre</th><th>Date</th></tr>
+			<tr th:each="event : ${evenements}">
+			<td th:text="${event.titre}" />
+			<td th:text="${event.date}" />
+			</tr>
+		</table>
+
+</body>
+
+</html>

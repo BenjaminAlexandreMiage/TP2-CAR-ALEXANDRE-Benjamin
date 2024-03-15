@@ -144,4 +144,14 @@ public class PersonneController {
 		return "redirect:/agenda/directionAgenda";
 	}
 	
+	@PostMapping("/afficheImpression")
+	public String afficheImpression(Model model,HttpSession session) {
+		
+		Iterable<Evenement> evenements = serviceEvenement.getEvenementOfAgenda((Long) session.getAttribute("idAgenda"));
+		model.addAttribute("evenements", evenements);
+		
+		return "/agenda/pageImpression";
+		
+	}
+	
 }
