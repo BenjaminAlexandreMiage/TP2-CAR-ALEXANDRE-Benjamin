@@ -1,5 +1,7 @@
 package com.example.TP2Spring.agenda;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,16 @@ public class AgendaServiceImpl implements AgendaService {
 	@Override
 	public Iterable<Agenda> getAllAgenda() {
 		return repoAgenda.findAll();
+	}
+	
+	@Override
+	public Agenda findAgenda(Long id) {
+		Optional<Agenda> verifid = repoAgenda.findById(id);
+		Agenda agendaTrouve = null;
+		if(verifid.get().getId().equals(id)){
+			agendaTrouve = verifid.get();
+		}
+		return agendaTrouve;
 	}
 
 }

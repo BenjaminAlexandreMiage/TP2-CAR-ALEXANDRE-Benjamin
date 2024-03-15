@@ -1,0 +1,25 @@
+<html xmlns:th="https://www.thymeleaf.org">
+
+<body>
+	
+	<h1 th:text="'Vous êtes sur l \' agenda  : ' + ${session.agendaTitre}"/>
+	
+	<h2>Vos évenements : </h2>
+	
+	<ul th:each="event : ${evenements}">
+			<il th:text="${event.titre} + ' à la date du : ' + ${event.date} "/>
+	</ul>	
+	
+	
+	<h2>Ajouter une évenement : </h2>
+	
+	<form action="/agenda/addEvenement" method="post">
+			<p>Titre : <input type="text" name="titre"></p>
+			<p>Date : <input type="Date" name="date">
+			<input type="hidden"  name="idAgenda" th:value="${session.idAgenda}">
+			<input type="submit" value="Créer l ' évenement">
+		</form>	
+
+</body>
+
+</html>

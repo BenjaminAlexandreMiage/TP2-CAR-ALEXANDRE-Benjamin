@@ -9,8 +9,14 @@
 		<h1>Vos agendas : </h1>
 		
 		<ul th:each="agenda : ${agendas}">
-			<li th:text="${agenda.titre}" />
-		</ul>
+			<form action="/agenda/directionAgenda" method="post">
+			
+				<input type="hidden"  name="idAgenda" th:value="${agenda.id}">
+				<input type="hidden"  name="idProprietaire" th:value="${session.id}">
+				
+				<input type="submit" th:value="${agenda.titre}">
+			</form>
+		</ul>	
 			
 			
 		
@@ -22,6 +28,7 @@
 			<input type="hidden"  name="mdp" th:value="${session.mdp}">
 			<input type="submit" value="Inscription">
 		</form>	
+		
 		
 	</body>
 </html>

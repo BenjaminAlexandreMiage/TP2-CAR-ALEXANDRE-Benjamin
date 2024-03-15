@@ -1,6 +1,10 @@
 package com.example.TP2Spring.agenda;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +26,9 @@ public class PersonneController {
 	
 	@Autowired
 	private AgendaService serviceAgenda;
+	
+	@Autowired
+	private EvenementService serviceEvenement;
 	
 	@GetMapping("/home")
 	public String home() {
@@ -78,6 +85,42 @@ public class PersonneController {
 		serviceAgenda.ajouterAgenda(titre,proprio.getId());
 	
 		return "redirect:/agenda/connexion";
+	}
+	
+	@PostMapping("/directionAgenda")
+	public String directionAgenda (@RequestParam Long idAgenda,@RequestParam Long idProprietaire,HttpSession session) {
+		Agenda verifAgenda = serviceAgenda.findAgenda(idAgenda);
+		if(verifAgenda == null) {
+			return "redirect:/agenda/connexion";
+		}
+		
+		session.setAttribute("idProprietaire", verifAgenda.getIdProprietaire());
+		session.setAttribute("idAgenda", verifAgenda.getId());
+		session.setAttribute("agendaTitre", verifAgenda.getTitre());
+		
+		return "agenda/pageAgenda";
+	}
+	
+	
+	@GetMapping("/directionAgenda")
+	public String directionAgenda(Model model) {
+		Iterable<Evenement> evenements = serviceEvenement.getAllEvenement();
+		model.addAttribute("evenements", evenements);
+		
+		return "agenda/pageAgenda";
+	}
+	
+	
+	@PostMapping("/addEvenement")
+	public String addEvenement (@RequestParam String titre,@RequestParam String date,@RequestParam Long idAgenda) throws ParseException {
+		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date d = dateFormat.parse(date);
+		
+		Agenda agenda = serviceAgenda.findAgenda(idAgenda);
+		serviceEvenement.ajouterEvenement(agenda.getId(),titre,d);
+	
+		return "redirect:/agenda/directionAgenda";
 	}
 	
 }

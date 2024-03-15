@@ -6,4 +6,6 @@ public interface AgendaService {
 	
 	Iterable<Agenda> getAllAgenda();
 
+	Agenda findAgenda(Long id);
+	
 }
