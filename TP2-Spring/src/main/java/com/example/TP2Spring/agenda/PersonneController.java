@@ -51,7 +51,10 @@ public class PersonneController {
 	}
 	
 	@GetMapping("/connexion")
-	public String Connexion() {
+	public String Connexion(Model model) {
+		Iterable<Agenda> agendas = serviceAgenda.getAllAgenda();
+		model.addAttribute("agendas", agendas);
+		
 		return "agenda/connexion";
 	}
 	
@@ -70,12 +73,9 @@ public class PersonneController {
 	
 	
 	@PostMapping("/addAgenda")
-	public String add (@RequestParam String titre,@RequestParam String mail,@RequestParam String mdp,Model model) {
+	public String add (@RequestParam String titre,@RequestParam String mail,@RequestParam String mdp) {
 		Personne proprio = service.findPersonne(mail, mdp);
 		serviceAgenda.ajouterAgenda(titre,proprio.getId());
-		
-		Iterable<Agenda> agendas = serviceAgenda.getAllAgenda();
-		model.addAttribute("agendas", agendas);
 	
 		return "redirect:/agenda/connexion";
 	}

@@ -7,13 +7,10 @@
 		<h1 th:text="'Personne connecté : ' + ${session.nom} + ' ' + ${session.prenom} "/>
 		
 		<h1>Vos agendas : </h1>
-
-			<table border="1">
-				<tr><th>id</th></tr>
-				<tr th:each="agenda : ${agendas}">
-					<td th:text="${agenda.id}" />
-				</tr>
-			</table>
+		
+		<ul th:each="agenda : ${agendas}">
+			<li th:text="${agenda.titre}" />
+		</ul>
 			
 			
 		
