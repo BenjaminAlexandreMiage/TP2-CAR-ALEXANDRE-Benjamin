@@ -27,4 +27,9 @@ public class EvenementServiceImpl implements EvenementService {
 		return repoEvenement.findByIdAgenda(idAgenda);
 	}
 	
+	@Override
+	public void deleteEvenement(Long idEvenement) {
+		repoEvenement.deleteById(idEvenement);
+	}
+	
 }

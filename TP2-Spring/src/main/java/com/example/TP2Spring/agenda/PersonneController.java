@@ -88,7 +88,7 @@ public class PersonneController {
 	}
 	
 	@PostMapping("/directionAgenda")
-	public String directionAgenda (@RequestParam Long idAgenda,@RequestParam Long idProprietaire,HttpSession session) {
+	public String directionAgenda (@RequestParam Long idAgenda,@RequestParam Long idProprietaire,Model model,HttpSession session) {
 		Agenda verifAgenda = serviceAgenda.findAgenda(idAgenda);
 		if(verifAgenda == null) {
 			return "redirect:/agenda/connexion";
@@ -98,13 +98,16 @@ public class PersonneController {
 		session.setAttribute("idAgenda", verifAgenda.getId());
 		session.setAttribute("agendaTitre", verifAgenda.getTitre());
 		
+		Iterable<Evenement> evenements = serviceEvenement.getEvenementOfAgenda((Long) session.getAttribute("idAgenda"));
+		model.addAttribute("evenements", evenements);
+		
 		return "agenda/pageAgenda";
 	}
 	
 	
 	@GetMapping("/directionAgenda")
-	public String directionAgenda(Model model) {
-		Iterable<Evenement> evenements = serviceEvenement.getAllEvenement();
+	public String directionAgenda(Model model,HttpSession session) {
+		Iterable<Evenement> evenements = serviceEvenement.getEvenementOfAgenda((Long) session.getAttribute("idAgenda"));
 		model.addAttribute("evenements", evenements);
 		
 		return "agenda/pageAgenda";
@@ -120,6 +123,24 @@ public class PersonneController {
 		Agenda agenda = serviceAgenda.findAgenda(idAgenda);
 		serviceEvenement.ajouterEvenement(agenda.getId(),titre,d);
 	
+		return "redirect:/agenda/directionAgenda";
+	}
+	
+	@GetMapping("/quitteAgenda")
+	public String quitteAgenda(HttpSession session) {
+		
+		session.removeAttribute("idProprietaire");
+		session.removeAttribute("idAgenda");
+		session.removeAttribute("agendaTitre");
+		
+		return "redirect:/agenda/connexion";
+	}
+	
+	@PostMapping("/supprimerEvenement")
+	public String supprimerEvenement(@RequestParam Long idEvenement) {
+		
+		serviceEvenement.deleteEvenement(idEvenement);
+		
 		return "redirect:/agenda/directionAgenda";
 	}
 	

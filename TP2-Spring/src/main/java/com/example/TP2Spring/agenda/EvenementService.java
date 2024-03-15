@@ -10,5 +10,7 @@ public interface EvenementService {
 	
 	Iterable<Evenement> getEvenementOfAgenda(Long idAgenda);
 	
+	void deleteEvenement(Long idEvenement);
+	
 
 }

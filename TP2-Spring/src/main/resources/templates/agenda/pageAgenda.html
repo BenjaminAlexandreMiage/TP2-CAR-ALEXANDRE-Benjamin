@@ -1,6 +1,8 @@
 <html xmlns:th="https://www.thymeleaf.org">
 
 <body>
+
+	<a href="/agenda/quitteAgenda"> Sortir de l'agenda </a>
 	
 	<h1 th:text="'Vous êtes sur l \' agenda  : ' + ${session.agendaTitre}"/>
 	
@@ -8,6 +10,11 @@
 	
 	<ul th:each="event : ${evenements}">
 			<il th:text="${event.titre} + ' à la date du : ' + ${event.date} "/>
+			
+			<form action="supprimerEvenement" method="post">
+				<input type="hidden"  name="idEvenement" th:value="${event.id}">
+				<input type="submit" value ="Supprimer">
+			</form>
 	</ul>	
 	
 	
