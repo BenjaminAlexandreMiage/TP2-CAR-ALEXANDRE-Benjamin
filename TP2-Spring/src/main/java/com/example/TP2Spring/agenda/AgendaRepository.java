@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface AgendaRepository extends CrudRepository<Agenda, Long> {
 	
-	public Iterable <Personne> findByIdProprietaire( @Param("idProprietaire") Long idProprietaire);
+	public Iterable<Agenda> findByIdProprietaire( @Param("idProprietaire") Long idProprietaire);
 	
 	public Optional<Agenda> findById( @Param("id") Long id);
 	

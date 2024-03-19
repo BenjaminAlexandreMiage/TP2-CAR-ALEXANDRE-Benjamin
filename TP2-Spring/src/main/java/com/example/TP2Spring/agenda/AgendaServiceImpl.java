@@ -33,5 +33,11 @@ public class AgendaServiceImpl implements AgendaService {
 		}
 		return agendaTrouve;
 	}
+	
+	@Override
+	public Iterable<Agenda> getAgendaByIdProprietaire(Long idProprietaire){
+		return repoAgenda.findByIdProprietaire(idProprietaire);
+	}
+
 
 }

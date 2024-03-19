@@ -42,7 +42,7 @@ public class PersonneController {
 	}
 	
 	@PostMapping("/connexion")
-	public String Connexion(@RequestParam String mail,@RequestParam String mdp,HttpSession session) {
+	public String Connexion(@RequestParam String mail,@RequestParam String mdp,HttpSession session,Model model) {
 		Personne verifPersonne = service.findPersonne(mail,mdp);
 		if(verifPersonne == null) {
 			return "redirect:/agenda/home";
@@ -54,12 +54,15 @@ public class PersonneController {
 		session.setAttribute("mdp", verifPersonne.getMdp());
 		session.setAttribute("id", verifPersonne.getId());
 		
+		Iterable<Agenda> agendas = serviceAgenda.getAgendaByIdProprietaire((Long) session.getAttribute("id"));
+		model.addAttribute("agendas", agendas);
+		
 		return "agenda/connexion";
 	}
 	
 	@GetMapping("/connexion")
-	public String Connexion(Model model) {
-		Iterable<Agenda> agendas = serviceAgenda.getAllAgenda();
+	public String Connexion(Model model,HttpSession session) {
+		Iterable<Agenda> agendas = serviceAgenda.getAgendaByIdProprietaire((Long) session.getAttribute("id"));
 		model.addAttribute("agendas", agendas);
 		
 		return "agenda/connexion";
@@ -72,7 +75,7 @@ public class PersonneController {
 		session.removeAttribute("nom");
 		session.removeAttribute("prenom");
 		session.removeAttribute("mail");
-		session.removeAttribute("id");
+//		session.removeAttribute("id");
 		session.removeAttribute("mdp");
 		
 		return "redirect:/agenda/home";
